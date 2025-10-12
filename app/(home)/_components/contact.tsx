@@ -103,7 +103,7 @@ export const Contact = () => {
                 className="mt-8 text-white/90 cursor-pointer hover:text-white"
                 onClick={() => (window.location.href = "/admin")}
               >
-                © 2025 CJ&apos;S Fresh Bite
+                © 2025 CJ&apos;s Fresh Bites
               </div>
             </div>
           </div>
