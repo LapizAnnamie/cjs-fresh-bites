@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Custom Professional Portfolio Color Scheme */
+
+    --background: 0 0% 98%;
+    --foreground: 0 0% 20%;
+
+    --tabs: 350 75% 90%;
+
+    --card: 350 50% 95%;
+    --card-foreground: 0 0% 20%;
+
+    --popover: 350 50% 95%;
+    --popover-foreground: 0 0% 20%;
+
+    --primary: 338 36% 85%;
+    --primary-foreground: 330 50% 40%;
+
+    --secondary: 350 50% 90%;
+    --secondary-foreground: 330 50% 30%;
+
+    --muted: 350 50% 85%;
+    --muted-foreground: 330 20% 40%;
+
+    --accent: 350 50% 85%;
+    --accent-foreground: 330 50% 30%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 350 20% 80%;
+    --input: 350 20% 80%;
+    --ring: 330 50% 40%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark Mode for Portfolio */
+
+    --background: 338.6, 87.5%, 93.7%;
+    --foreground: 330 50% 40%;
+
+    --tabs: 350 30% 25%;
+
+    --card: 330 50% 25%;
+    --card-foreground: 350 50% 90%;
+
+    --popover: 330 50% 25%;
+    --popover-foreground: 350 50% 90%;
+
+    --primary: 330 50% 70%;
+    --primary-foreground: 330 50% 50%;
+
+    --secondary: 350 30% 25%;
+    --secondary-foreground: 350 50% 90%;
+
+    --muted: 350 30% 30%;
+    --muted-foreground: 350 20% 75%;
+
+    --accent: 350 30% 30%;
+    --accent-foreground: 350 50% 90%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 350 50% 90%;
+
+    --border: 330 50% 40%;
+    --input: 330 50% 40%;
+    --ring: 330 50% 40%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-bree;
+  }
+}
+
+.swiper-pagination-bullet {
+  background-color: rgba(217, 139, 167, 0.4);
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: rgba(217, 139, 167, 1);
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px);
+  }
+}
+
+.shake {
+  animation: shake 1s;
+}
