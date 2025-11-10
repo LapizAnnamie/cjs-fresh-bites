@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { firestore } from "@/firebase/config";
 import MenuCard, { type MenuItem } from "./menu-card";
@@ -14,11 +14,17 @@ export default function OnTheMenu() {
 
   useEffect(() => {
     (async () => {
+      const targetNames = [
+        "Golden Crispy Lumpia",
+        "Spicy Grilled Shrimp",
+        "Sweet & Spicy Chicken Wings",
+      ];
+
       const q = query(
         collection(firestore, "menus"),
-        orderBy("createdAt", "desc"),
-        limit(3)
+        where("name", "in", targetNames)
       );
+
       const snap = await getDocs(q);
       const data: MenuItem[] = snap.docs.map((d) => {
         const v = d.data() as any;
@@ -30,29 +36,26 @@ export default function OnTheMenu() {
           price: typeof v.price === "number" ? v.price : Number(v.price ?? 0),
         };
       });
-      setItems(data);
+
+      const ordered = targetNames
+        .map((n) => data.find((item) => item.name === n))
+        .filter(Boolean) as MenuItem[];
+
+      setItems(ordered);
     })();
   }, []);
 
   return (
     <section
       id="menus"
-      className="
-        min-h-screen
-        py-16 sm:py-20 lg:py-24
-        px-4 sm:px-6 lg:px-12
-        justify-center
-        scroll-mt-28 sm:scroll-mt-24
-      "
+      className="min-h-screen py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 justify-center scroll-mt-28 sm:scroll-mt-24"
       style={{ backgroundColor: DEEP_RED }}
     >
       <div className="mx-auto max-w-7xl px-2 sm:px-2 lg:px-4">
         <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-8 items-stretch">
-          {/* LEFT: deep-red slab with rounded corners */}
+          {/* LEFT */}
           <div
-            className="rounded-3xl text-white flex flex-col justify-center 
-                       items-center text-center lg:items-start lg:text-left 
-                       p-6 sm:p-8 lg:p-12"
+            className="rounded-3xl text-white flex flex-col justify-center items-center text-center lg:items-start lg:text-left p-6 sm:p-8 lg:p-12"
             style={{ backgroundColor: DEEP_RED }}
           >
             <h2 className="font-bree font-extrabold leading-[1.0] tracking-tight text-white">
@@ -74,7 +77,7 @@ export default function OnTheMenu() {
             </div>
           </div>
 
-          {/* RIGHT: menu cards */}
+          {/* RIGHT */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:py-28">
             {items
               ? items.map((item) => <MenuCard key={item.id} item={item} />)

@@ -25,13 +25,24 @@ export default function FullMenuPage() {
           price: typeof v.price === "number" ? v.price : Number(v.price ?? 0),
         };
       });
-      setItems(data);
+
+      const excludedNames = [
+        "Golden Crispy Lumpia",
+        "Spicy Grilled Shrimp",
+        "Sweet & Spicy Chicken Wings",
+      ];
+
+      const filtered = data.filter(
+        (item) => !excludedNames.includes(item.name)
+      );
+
+      setItems(filtered);
     })();
   }, []);
 
   return (
     <main className="py-16 px-4 sm:px-6 lg:px-12">
-      <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {items
           ? items.map((item) => <MenuCard key={item.id} item={item} />)
           : Array.from({ length: 6 }).map((_, i) => (
