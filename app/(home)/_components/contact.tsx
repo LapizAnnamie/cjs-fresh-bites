@@ -95,7 +95,7 @@ export const Contact = () => {
                 <FaMapMarkerAlt className="text-3xl" />
                 <div>
                   <p className="font-bold">Address</p>
-                  <p>Houston, Texas</p>
+                  <p>1001 Westheimer Rd, Houston, TX 77006</p>
                 </div>
               </div>
 
